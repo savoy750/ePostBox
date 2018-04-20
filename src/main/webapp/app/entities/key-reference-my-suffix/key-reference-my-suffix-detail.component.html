@@ -1,0 +1,40 @@
+
+<div *ngIf="keyReference">
+    <h2><span>Key Reference</span> {{keyReference.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Internal Key</span></dt>
+        <dd>
+            <span>{{keyReference.internalKey}}</span>
+        </dd>
+        <dt><span>E Post Key Name</span></dt>
+        <dd>
+            <span>{{keyReference.ePostKeyName}}</span>
+        </dd>
+        <dt><span>E Post Key Value</span></dt>
+        <dd>
+            <span>{{keyReference.ePostKeyValue}}</span>
+        </dd>
+        <dt><span>Internal Key</span></dt>
+        <dd>
+            <div *ngIf="keyReference.internalKeyId">
+                <a [routerLink]="['/data-reference-my-suffix', keyReference.internalKeyId]">{{keyReference.internalKeyId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'key-reference-my-suffix/'+ keyReference.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

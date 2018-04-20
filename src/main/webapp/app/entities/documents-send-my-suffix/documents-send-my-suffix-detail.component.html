@@ -1,0 +1,56 @@
+
+<div *ngIf="documentsSend">
+    <h2><span>Documents Send</span> {{documentsSend.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Title</span></dt>
+        <dd>
+            <span>{{documentsSend.title}}</span>
+        </dd>
+        <dt><span>Correlation Id</span></dt>
+        <dd>
+            <span>{{documentsSend.correlationId}}</span>
+        </dd>
+        <dt><span>Document Type</span></dt>
+        <dd>
+            <span>{{documentsSend.documentType}}</span>
+        </dd>
+        <dt><span>Tag</span></dt>
+        <dd>
+            <span>{{documentsSend.tag}}</span>
+        </dd>
+        <dt><span>Internal Key</span></dt>
+        <dd>
+            <span>{{documentsSend.internalKey}}</span>
+        </dd>
+        <dt><span>Message</span></dt>
+        <dd>
+            <span>{{documentsSend.message}}</span>
+        </dd>
+        <dt><span>Status</span></dt>
+        <dd>
+            <span>{{documentsSend.status}}</span>
+        </dd>
+        <dt><span>Internal Key</span></dt>
+        <dd>
+            <div *ngIf="documentsSend.internalKeyId">
+                <a [routerLink]="['/key-reference-my-suffix', documentsSend.internalKeyId]">{{documentsSend.internalKeyId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'documents-send-my-suffix/'+ documentsSend.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

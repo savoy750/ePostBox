@@ -1,0 +1,69 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myDocumentsSendLabel">Create or edit a Documents Send</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!documentsSend.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="documentsSend.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_title">Title</label>
+            <input type="text" class="form-control" name="title" id="field_title"
+                [(ngModel)]="documentsSend.title" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_correlationId">Correlation Id</label>
+            <input type="text" class="form-control" name="correlationId" id="field_correlationId"
+                [(ngModel)]="documentsSend.correlationId" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_documentType">Document Type</label>
+            <input type="number" class="form-control" name="documentType" id="field_documentType"
+                [(ngModel)]="documentsSend.documentType" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_tag">Tag</label>
+            <input type="text" class="form-control" name="tag" id="field_tag"
+                [(ngModel)]="documentsSend.tag" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_internalKey">Internal Key</label>
+            <input type="text" class="form-control" name="internalKey" id="field_internalKey"
+                [(ngModel)]="documentsSend.internalKey" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_message">Message</label>
+            <input type="text" class="form-control" name="message" id="field_message"
+                [(ngModel)]="documentsSend.message" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_status">Status</label>
+            <select class="form-control" name="status" [(ngModel)]="documentsSend.status" id="field_status" >
+                <option value="CREATED">CREATED</option>
+                <option value="ERROR">ERROR</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_internalKey">Internal Key</label>
+            <select class="form-control" id="field_internalKey" name="internalKey" [(ngModel)]="documentsSend.internalKeyId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="keyReferenceOption.id" *ngFor="let keyReferenceOption of keyreferences; trackBy: trackKeyReferenceById">{{keyReferenceOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

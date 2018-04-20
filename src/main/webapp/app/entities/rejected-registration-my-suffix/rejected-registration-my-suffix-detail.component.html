@@ -1,0 +1,46 @@
+
+<div *ngIf="rejectedRegistration">
+    <h2><span>Rejected Registration</span> {{rejectedRegistration.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>E Post Key Name</span></dt>
+        <dd>
+            <span>{{rejectedRegistration.ePostKeyName}}</span>
+        </dd>
+        <dt><span>E Post Key Value</span></dt>
+        <dd>
+            <span>{{rejectedRegistration.ePostKeyValue}}</span>
+        </dd>
+        <dt><span>No AVS</span></dt>
+        <dd>
+            <span>{{rejectedRegistration.noAVS}}</span>
+        </dd>
+        <dt><span>Nom</span></dt>
+        <dd>
+            <span>{{rejectedRegistration.nom}}</span>
+        </dd>
+        <dt><span>Prenom</span></dt>
+        <dd>
+            <span>{{rejectedRegistration.prenom}}</span>
+        </dd>
+        <dt><span>Date De Naissance</span></dt>
+        <dd>
+            <span>{{rejectedRegistration.dateDeNaissance | date:'medium'}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'rejected-registration-my-suffix/'+ rejectedRegistration.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>
