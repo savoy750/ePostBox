@@ -1,0 +1,89 @@
+<div>
+    <h2>
+        <span>Documents Sends</span>
+        <button class="btn btn-primary float-right jh-create-entity create-documents-send-my-suffix" [routerLink]="['/', { outlets: { popup: ['documents-send-my-suffix-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span class="hidden-sm-down" >
+            Create new Documents Send
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="Query">
+                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
+                        <span class="fa fa-search"></span>
+                    </button>
+                    <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                        <span class="fa fa-trash-o"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="documentsSends">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+            <th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="title"><span>Title</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="correlationId"><span>Correlation Id</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="documentType"><span>Document Type</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="tag"><span>Tag</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="internalKey"><span>Internal Key</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="message"><span>Message</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="status"><span>Status</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="internalKeyId"><span>Internal Key</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let documentsSend of documentsSends ;trackBy: trackId">
+                <td><a [routerLink]="['../documents-send-my-suffix', documentsSend.id ]">{{documentsSend.id}}</a></td>
+                <td>{{documentsSend.title}}</td>
+                <td>{{documentsSend.correlationId}}</td>
+                <td>{{documentsSend.documentType}}</td>
+                <td>{{documentsSend.tag}}</td>
+                <td>{{documentsSend.internalKey}}</td>
+                <td>{{documentsSend.message}}</td>
+                <td>{{documentsSend.status}}</td>
+                <td>
+                    <div *ngIf="documentsSend.internalKeyId">
+                        <a [routerLink]="['../key-reference-my-suffix', documentsSend.internalKeyId  ]" >{{documentsSend.internalKeyId}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../documents-send-my-suffix', documentsSend.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'documents-send-my-suffix/'+ documentsSend.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'documents-send-my-suffix/'+ documentsSend.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

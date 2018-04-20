@@ -44,6 +44,10 @@ public class CacheConfiguration {
             cm.createCache(ch.fer.epost.application.domain.User.class.getName() + ".authorities", jcacheConfiguration);
             cm.createCache(ch.fer.epost.application.domain.PersistentToken.class.getName(), jcacheConfiguration);
             cm.createCache(ch.fer.epost.application.domain.User.class.getName() + ".persistentTokens", jcacheConfiguration);
+            cm.createCache(ch.fer.epost.application.domain.KeyReference.class.getName(), jcacheConfiguration);
+            cm.createCache(ch.fer.epost.application.domain.DataReference.class.getName(), jcacheConfiguration);
+            cm.createCache(ch.fer.epost.application.domain.RejectedRegistration.class.getName(), jcacheConfiguration);
+            cm.createCache(ch.fer.epost.application.domain.DocumentsSend.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

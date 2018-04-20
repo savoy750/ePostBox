@@ -1,0 +1,42 @@
+
+<div *ngIf="dataReference">
+    <h2><span>Data Reference</span> {{dataReference.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Internal Key</span></dt>
+        <dd>
+            <span>{{dataReference.internalKey}}</span>
+        </dd>
+        <dt><span>No AVS</span></dt>
+        <dd>
+            <span>{{dataReference.noAVS}}</span>
+        </dd>
+        <dt><span>Nom</span></dt>
+        <dd>
+            <span>{{dataReference.nom}}</span>
+        </dd>
+        <dt><span>Prenom</span></dt>
+        <dd>
+            <span>{{dataReference.prenom}}</span>
+        </dd>
+        <dt><span>Date De Naissance</span></dt>
+        <dd>
+            <span>{{dataReference.dateDeNaissance | date:'medium'}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'data-reference-my-suffix/'+ dataReference.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

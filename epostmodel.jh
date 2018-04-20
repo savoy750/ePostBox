@@ -1,0 +1,61 @@
+entity KeyReference {
+    internalKey String required,
+	ePostKeyName String required,
+    ePostKeyValue String required
+}
+
+entity DataReference {
+    internalKey String,
+	noAVS String,
+    nom String,
+    prenom String,
+    dateDeNaissance Instant
+}
+
+entity RejectedRegistration
+{
+    ePostKeyName String required,
+    ePostKeyValue String required,
+    noAVS String,
+    nom String,
+    prenom String,
+    dateDeNaissance Instant
+
+}
+
+
+entity DocumentsSend {
+	title String,
+    correlationId String,
+    documentType Integer,
+    tag String, 
+    internalKey String,
+    message String,
+    status Status
+}
+
+
+enum Status {
+    CREATED, ERROR
+}
+
+relationship OneToOne {
+	KeyReference{internalKey} to DataReference
+}
+
+relationship ManyToOne {
+	DocumentsSend{internalKey} to KeyReference
+}
+
+
+// Set pagination options
+paginate KeyReference, DataReference, DocumentsSend  with infinite-scroll
+paginate RejectedRegistration with pagination
+
+dto * with mapstruct
+
+service all with serviceImpl
+// Set service options to all except few
+//service all with serviceImpl except Employee, Job
+// Set an angular suffix
+angularSuffix * with mySuffix
